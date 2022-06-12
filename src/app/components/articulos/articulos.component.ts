@@ -57,7 +57,7 @@ export class ArticulosComponent implements OnInit {
     Activo: new FormControl(true),
   });
 
-
+  submitted = false;
  
   constructor(
      //private articulosService: MockArticulosService,
