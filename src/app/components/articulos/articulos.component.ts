@@ -4,6 +4,8 @@ import { ArticuloFamilia } from "../../models/articulo-familia";
 import { MockArticulosService } from "../../services/mock-articulos.service";
 import { MockArticulosFamiliasService } from "../../services/mock-articulos-familias.service";
 import {  FormGroup, FormControl, Validators } from "@angular/forms";
+import { ArticulosService } from "../../services/articulos.service";
+import { ArticulosFamiliasService } from "../../services/articulos-familias.service";
  
 @Component({
   selector: "app-articulos",
@@ -58,8 +60,10 @@ export class ArticulosComponent implements OnInit {
 
  
   constructor(
-    private articulosService: MockArticulosService,
-    private articulosFamiliasService: MockArticulosFamiliasService,
+     //private articulosService: MockArticulosService,
+    //private articulosFamiliasService: MockArticulosFamiliasService,
+    private articulosService: ArticulosService,
+    private articulosFamiliasService: ArticulosFamiliasService
   ) {}
  
   ngOnInit() {
@@ -120,11 +124,11 @@ export class ArticulosComponent implements OnInit {
     this.BuscarPorId(Item, "M");
   }
  
-  // grabar tanto altas como modificaciones
-  Grabar() {
-    alert("Registro Grabado!");
-    this.Volver();
-  }
+// grabar tanto altas como modificaciones
+Grabar() {
+  alert("Registro Grabado!");
+  this.Volver();
+}
  
 // representa la baja logica 
 ActivarDesactivar(Item : Articulo) {
@@ -151,4 +155,11 @@ ActivarDesactivar(Item : Articulo) {
     alert('Sin desarrollar...');
   }
  
+
+  GetArticuloFamiliaNombre(Id:number) {
+    var Nombre = this.Familias.find(x => x.IdArticuloFamilia === Id)?.Nombre;
+    return Nombre;
+  }
+
+
 }
