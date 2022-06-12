@@ -1,6 +1,4 @@
-<h3>
-  {{ Titulo }} <small>{{ TituloAccionABMC[AccionABMC] }}</small>
-</h3>
+<h3>{{ Titulo }} <small>{{ TituloAccionABMC[AccionABMC] }}</small></h3>
 
 <!-- Formulario Filtro de búsqueda, se ve cuando la AccionABMC es "L"(busqueda/listado)-->
 <form
@@ -57,7 +55,6 @@
         <th class="text-center">Precio</th>
         <th class="text-center">Stock</th>
         <th class="text-center">Familia</th>
-        <!-- Agregado -->
         <th class="text-center">Fecha de Alta</th>
         <th class="text-center">Activo</th>
         <th class="text-center text-nowrap">Acciones</th>
@@ -68,10 +65,7 @@
         <td>{{ item.Nombre | uppercase }}</td>
         <td class="text-right">{{ item.Precio | currency: '$' }}</td>
         <td class="text-right">{{ item.Stock }}</td>
-        <td class="text-right">
-          {{ GetArticuloFamiliaNombre(item.IdArticuloFamilia) }}
-        </td>
-        <!-- Agregado -->
+        <td class="text-right">{{ GetArticuloFamiliaNombre(item.IdArticuloFamilia) }}</td>
         <td>{{ item.FechaAlta | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.Activo ? 'SI' : 'NO' }}</td>
         <td class="text-center text-nowrap">
