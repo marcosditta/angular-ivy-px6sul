@@ -102,6 +102,7 @@ export class ArticulosComponent implements OnInit {
     this.AccionABMC = "A";
     this.FormRegistro.reset({ Activo: true, IdArticulo: 0 });
     this.submitted = false;
+    this.FormRegistro.markAsUntouched(); 
   }
 
  
@@ -145,6 +146,8 @@ export class ArticulosComponent implements OnInit {
       return;
     }
     this.BuscarPorId(Item, "M");
+    this.submitted = false;
+    this.FormRegistro.markAsUntouched(); 
   }
  
 // grabar tanto altas como modificaciones

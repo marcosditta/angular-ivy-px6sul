@@ -202,6 +202,11 @@
           type="text"
           class="form-control text-uppercase"
           formControlName="Precio"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['Precio'].touched || submitted) &&
+              FormRegistro.controls['Precio'].errors
+          }"
         />
         <div
           class="text-danger"
@@ -232,6 +237,11 @@
           name="Stock"
           class="form-control text-uppercase"
           formControlName="Stock"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['Stock'].touched || submitted) &&
+              FormRegistro.controls['Stock'].errors
+          }"
         />
         <div
           class="text-danger"
@@ -262,6 +272,11 @@
           name="CodigoDeBarra"
           class="form-control text-uppercase"
           formControlName="CodigoDeBarra"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['CodigoDeBarra'].touched || submitted) &&
+              FormRegistro.controls['CodigoDeBarra'].errors
+          }"
         />
         <div
           class="text-danger"
@@ -294,6 +309,11 @@
           name="IdArticuloFamilia"
           class="form-control"
           formControlName="IdArticuloFamilia"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['IdArticuloFamilia'].touched || submitted) &&
+              FormRegistro.controls['IdArticuloFamilia'].errors
+          }"
         >
           <option
             *ngFor="let opt of Familias"
@@ -324,6 +344,11 @@
           class="form-control text-uppercase"
           name="FechaAlta"
           formControlName="FechaAlta"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['FechaAlta'].touched || submitted) &&
+              FormRegistro.controls['FechaAlta'].errors
+          }"
         />
         <div
           class="text-danger"
@@ -354,6 +379,11 @@
           [disabled]="false"
           class="form-control"
           formControlName="Activo"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls['Activo'].touched || submitted) &&
+              FormRegistro.controls['Activo'].errors
+          }"
         >
           <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
             {{ opt.Nombre }}
