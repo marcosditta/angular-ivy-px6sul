@@ -94,7 +94,8 @@
       <div class="col">
         <span class="label label-default">Registros: {{ RegistrosTotal }}</span>
       </div>
-      <div class="col text-center">Directiva paginador aqui</div>
+      <div class="col text-center"><ngb-pagination [(page)]="Pagina" (pageChange)="Buscar()" [maxSize]="10"
+        [collectionSize]="RegistrosTotal"  [pageSize]="10"></ngb-pagination></div>
       <div class="col text-right">
         <button
           type="button"

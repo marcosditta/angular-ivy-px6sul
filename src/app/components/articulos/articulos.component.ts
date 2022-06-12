@@ -6,7 +6,12 @@ import { MockArticulosFamiliasService } from "../../services/mock-articulos-fami
 import {  FormGroup, FormControl, Validators } from "@angular/forms";
 import { ArticulosService } from "../../services/articulos.service";
 import { ArticulosFamiliasService } from "../../services/articulos-familias.service";
- 
+
+
+
+
+
+
 @Component({
   selector: "app-articulos",
   templateUrl: "./articulos.component.html",
@@ -22,7 +27,6 @@ export class ArticulosComponent implements OnInit {
     L: "(Listado)"
   };
   AccionABMC : string = "L" // inicia en el listado de articulos (buscar con parametros)
- 
   Mensajes = {
     SD: " No se encontraron registros...",
     RD: " Revisar los datos ingresados..."
@@ -31,6 +35,7 @@ export class ArticulosComponent implements OnInit {
   Items: Articulo[]|null = null;
   RegistrosTotal: number = 1;
   Familias: ArticuloFamilia[]|null = null;
+
   Pagina = 1; // inicia pagina 1
  
   // opciones del combo activo
@@ -40,7 +45,6 @@ export class ArticulosComponent implements OnInit {
     { Id: false, Nombre: "NO" }
   ];
  
-
   FormBusqueda = new FormGroup({
     Nombre: new FormControl(null),
     Activo: new FormControl(null),
@@ -48,12 +52,30 @@ export class ArticulosComponent implements OnInit {
 
   FormRegistro = new FormGroup({
     IdArticulo: new FormControl(0),
-    Nombre: new FormControl(''),
-    Precio: new FormControl(null),
-    Stock: new FormControl(null),
-    CodigoDeBarra: new FormControl (''),
-    IdArticuloFamilia: new FormControl(''),
-    FechaAlta: new FormControl(''),
+    Nombre: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(55),
+    ]),
+    Precio: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('[0-9]{1,7}'),
+    ]),
+    Stock: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('[0-9]{1,7}'),
+    ]),
+    CodigoDeBarra: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[0-9]{13}'),
+    ]),
+    IdArticuloFamilia: new FormControl('', [Validators.required]),
+    FechaAlta: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        '(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}'
+      ),
+    ]),
     Activo: new FormControl(true),
   });
 
@@ -63,7 +85,7 @@ export class ArticulosComponent implements OnInit {
      //private articulosService: MockArticulosService,
     //private articulosFamiliasService: MockArticulosFamiliasService,
     private articulosService: ArticulosService,
-    private articulosFamiliasService: ArticulosFamiliasService
+    private articulosFamiliasService: ArticulosFamiliasService,
   ) {}
  
   ngOnInit() {
@@ -125,7 +147,7 @@ export class ArticulosComponent implements OnInit {
   }
  
 // grabar tanto altas como modificaciones
-Grabar() {
+Grabar() {   //No me salio... Está en la pag 40 de la guia paso a paso
   alert("Registro Grabado!");
   this.Volver();
 }

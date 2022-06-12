@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^12.1.2",
+    "@ng-bootstrap/ng-bootstrap": "11",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "4.6",
     "font-awesome": "^4.7.0",

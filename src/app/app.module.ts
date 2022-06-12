@@ -20,6 +20,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticulosFamiliasComponent } from './components/articulos-familias/articulos-familias.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
+
+
+
 //import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 //import { VentasComponent } from './components/ventas/ventas.component';
 //import { VentasConsultasComponent } from './components/ventas-consultas/ventas-consultas.component';
