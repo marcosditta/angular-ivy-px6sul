@@ -3,7 +3,7 @@
 </h3>
 
 <!-- Formulario Filtro de búsqueda, se ve cuando la AccionABMC es "L"(busqueda/listado)-->
-<form name="FormBusqueda" class="bg-light">
+<form name="FormBusqueda" class="bg-light"  *ngIf="AccionABMC == 'L'">
   <div class="form-group row">
     <label class="col-form-label col-sm-2 offset-sm-1"> Nombre: </label>
     <div class="col-sm-3">
@@ -16,6 +16,7 @@
       </select>
     </div>
   </div>
+
   <!-- Botones -->
   <div class="row justify-content-center">
     <button
@@ -34,7 +35,7 @@
 </form>
 
 <!-- Tabla de resutados de busqueda y Paginador-->
-<div id="divTablaResultados">
+<div id="divTablaResultados" *ngIf="AccionABMC == 'L' &&  Items!=null && Items.length > 0">
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -84,6 +85,7 @@
       </tr>
     </tbody>
   </table>
+
   <!-- Paginador-->
   <div id="divPaginador">
     <div class="row bg-light">
@@ -106,14 +108,14 @@
 </div>
 
 <!--No se encontraron registros-->
-<div id="divMsjFormBusqueda" class="alert alert-info">
+<div id="divMsjFormBusqueda" class="alert alert-info" *ngIf="AccionABMC == 'L' &&  Items!=null && Items.length== 0">
   <i class="fa fa-exclamation-sign"></i>{{ Mensajes['SD'] }}
   <!-- texto: No se encontraron registros -->
 </div>
 
 <!-- Registro en Alta,Modificacion o Consulta -->
-<form name="FormRegistro">
-  <fieldset>
+<form name="FormRegistro" class="bg-light"  *ngIf="AccionABMC != 'L'">
+  <fieldset [disabled]="AccionABMC==='C'">
     <!--campo nombre-->
     <div class="form-group row">
       <label class="col-form-label col-sm-2 offset-sm-2" for="Nombre">
@@ -194,17 +196,19 @@
 
   <!-- Botones Grabar, Cancelar/Volver' -->
   <div class="row justify-content-center">
-    <button type="button" class="btn btn-primary" (click)="Grabar()">
+    <button type="button" class="btn btn-primary" (click)="Grabar()" *ngIf=" AccionABMC == 'A'  || AccionABMC == 'M'"  >
       <i class="fa fa-check"></i> Grabar
     </button>
     &nbsp;
     <button type="button" class="btn btn-warning" (click)="Volver()">
-      <i class="fa fa-undo"></i> Volver/Cancelar
+      <i class="fa fa-undo"></i> {{AccionABMC == 'A'  || AccionABMC == 'M' ? 'Cancelar' : 'Volver'}}
     </button>
+
   </div>
 
   <!--texto: Revisar los datos ingresados...-->
-  <div id="divMsjFormRegistro" class="row alert alert-danger">
-    <i class="fa fa-exclamation-sign"></i>{{ Mensajes['RD'] }}
+  <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="false">
+    <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
   </div>
+
 </form>
