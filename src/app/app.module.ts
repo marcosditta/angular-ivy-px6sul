@@ -18,7 +18,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { MenuComponent } from './components/menu/menu.component';
-//import { ArticulosFamiliasComponent } from './components/articulos-familias/articulos-familias.component';
+import { ArticulosFamiliasComponent } from './components/articulos-familias/articulos-familias.component';
 //import { ArticulosComponent } from './components/articulos/articulos.component';
 //import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 //import { VentasComponent } from './components/ventas/ventas.component';
@@ -44,7 +44,7 @@ import { MenuComponent } from './components/menu/menu.component';
         { path: '', redirectTo: '/inicio', pathMatch: 'full' },
         { path: 'inicio', component: InicioComponent },
         //{ path: 'articulos', component: ArticulosComponent },
-        //{ path: 'articulosfamilias', component: ArticulosFamiliasComponent },
+        { path: 'articulosfamilias', component: ArticulosFamiliasComponent },
         //{ path: 'clientes', component: ClientesComponent },
         //{ path: 'ventas', component: VentasComponent },
         //{ path: 'ventasconsultas', component: VentasConsultasComponent },
@@ -74,7 +74,7 @@ import { MenuComponent } from './components/menu/menu.component';
     AppComponent,
     InicioComponent,
     MenuComponent,
-    // ArticulosFamiliasComponent,
+    ArticulosFamiliasComponent,
     // ArticulosComponent,
     // ModalDialogComponent,
 
