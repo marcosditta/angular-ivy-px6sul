@@ -3,16 +3,23 @@
 </h3>
 
 <!-- Formulario Filtro de búsqueda, se ve cuando la AccionABMC es "L"(busqueda/listado)-->
-<form name="FormBusqueda" [formGroup]='FormBusqueda' class="bg-light" *ngIf="AccionABMC == 'L'" >
+<form
+  name="FormBusqueda"
+  [formGroup]="FormBusqueda"
+  class="bg-light"
+  *ngIf="AccionABMC == 'L'"
+>
   <div class="form-group row">
     <label class="col-form-label col-sm-2 offset-sm-1"> Nombre: </label>
     <div class="col-sm-3">
-      <input type="text" class="form-control"   formControlName="Nombre"/>
+      <input type="text" class="form-control" formControlName="Nombre" />
     </div>
     <label class="col-form-label col-sm-2 offset-sm-1"> Activo: </label>
     <div class="col-sm-3">
       <select class="form-control" name="Activo">
-      <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">‌{{ opt.Nombre }}</option>
+        <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
+          ‌{{ opt.Nombre }}
+        </option>
       </select>
     </div>
   </div>
@@ -35,14 +42,18 @@
 </form>
 
 <!-- Tabla de resutados de busqueda y Paginador-->
-<div id="divTablaResultados" *ngIf="AccionABMC == 'L' &&  Items!=null && Items.length > 0">
+<div
+  id="divTablaResultados"
+  *ngIf="AccionABMC == 'L' && Items != null && Items.length > 0"
+>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th class="text-center">Nombre</th>
         <th class="text-center">Precio</th>
         <th class="text-center">Stock</th>
-        <th class="text-center">Familia</th>    <!-- Agregado -->
+        <th class="text-center">Familia</th>
+        <!-- Agregado -->
         <th class="text-center">Fecha de Alta</th>
         <th class="text-center">Activo</th>
         <th class="text-center text-nowrap">Acciones</th>
@@ -53,7 +64,10 @@
         <td>{{ item.Nombre | uppercase }}</td>
         <td class="text-right">{{ item.Precio | currency }}</td>
         <td class="text-right">{{ item.Stock }}</td>
-        <td class="text-right">{{GetArticuloFamiliaNombre(item.IdArticuloFamilia)}}</td>     <!-- Agregado -->
+        <td class="text-right">
+          {{ GetArticuloFamiliaNombre(item.IdArticuloFamilia) }}
+        </td>
+        <!-- Agregado -->
         <td>{{ item.FechaAlta | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.Activo ? 'SI' : 'NO' }}</td>
         <td class="text-center text-nowrap">
@@ -94,8 +108,15 @@
       <div class="col">
         <span class="label label-default">Registros: {{ RegistrosTotal }}</span>
       </div>
-      <div class="col text-center"><ngb-pagination [(page)]="Pagina" (pageChange)="Buscar()" [maxSize]="10"
-        [collectionSize]="RegistrosTotal"  [pageSize]="10"></ngb-pagination></div>
+      <div class="col text-center">
+        <ngb-pagination
+          [(page)]="Pagina"
+          (pageChange)="Buscar()"
+          [maxSize]="10"
+          [collectionSize]="RegistrosTotal"
+          [pageSize]="10"
+        ></ngb-pagination>
+      </div>
       <div class="col text-right">
         <button
           type="button"
@@ -111,21 +132,34 @@
 </div>
 
 <!--No se encontraron registros-->
-<div id="divMsjFormBusqueda" class="alert alert-info" *ngIf="AccionABMC == 'L' &&  Items!=null && Items.length== 0">
+<div
+  id="divMsjFormBusqueda"
+  class="alert alert-info"
+  *ngIf="AccionABMC == 'L' && Items != null && Items.length == 0"
+>
   <i class="fa fa-exclamation-sign"></i>{{ Mensajes['SD'] }}
   <!-- texto: No se encontraron registros -->
 </div>
 
 <!-- Registro en Alta,Modificacion o Consulta -->
-<form name="FormRegistro" [formGroup]='FormRegistro' class="bg-light"  *ngIf="AccionABMC != 'L'" >
-  <fieldset [disabled]="AccionABMC==='C'">
+<form
+  name="FormRegistro"
+  [formGroup]="FormRegistro"
+  class="bg-light"
+  *ngIf="AccionABMC != 'L'"
+>
+  <fieldset [disabled]="AccionABMC === 'C'">
     <!--campo nombre-->
     <div class="form-group row">
       <label class="col-form-label col-sm-2 offset-sm-2" for="Nombre">
         Nombre <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-      <input type="text" class="form-control"   formControlName="Nombre"/>
+        <input type="text" class="form-control" formControlName="Nombre" />
+        <div class="validacion" *ngIf="(FormRegistro.controls['Nombre'].touched || submitted) 
+                        && FormRegistro.controls['Nombre'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -135,7 +169,16 @@
         Precio <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <input type="text" name="Precio" class="form-control"   formControlName="Precio"/>
+        <input
+          type="text"
+          name="Precio"
+          class="form-control"
+          formControlName="Precio"
+        />
+        <div class="validacion" *ngIf="(FormRegistro.controls['Precio'].touched || submitted) 
+                        && FormRegistro.controls['Precio'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -145,7 +188,16 @@
         Stock <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <input type="text" name="Stock" class="form-control" formControlName="Stock"/>
+        <input
+          type="text"
+          name="Stock"
+          class="form-control"
+          formControlName="Stock"
+        />
+        <div class="validacion" *ngIf="(FormRegistro.controls['Stock'].touched || submitted) 
+                        && FormRegistro.controls['Stock'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -155,7 +207,16 @@
         Codigo De Barra <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-      <input type="text" name="CodigoDeBarra" class="form-control" formControlName="CodigoDeBarra" />
+        <input
+          type="text"
+          name="CodigoDeBarra"
+          class="form-control"
+          formControlName="CodigoDeBarra"
+        />
+        <div class="validacion" *ngIf="(FormRegistro.controls['CodigoDeBarra'].touched || submitted) 
+                        && FormRegistro.controls['CodigoDeBarra'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -168,9 +229,18 @@
         Familia <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <select name="IdArticuloFamilia" class="form-control">
-        <option *ngFor="let opt of Familias" [ngValue]="opt.IdArticuloFamilia">{{ opt.Nombre }}</option>
+        <select name="IdArticuloFamilia" class="form-control" formControlName="IdArticuloFamilia"> 
+          <option
+            *ngFor="let opt of Familias"
+            [ngValue]="opt.IdArticuloFamilia"
+          >
+            {{ opt.Nombre }}
+          </option>
         </select>
+        <div class="validacion" *ngIf="(FormRegistro.controls['IdArticuloFamilia'].touched || submitted) 
+                        && FormRegistro.controls['IdArticuloFamilia'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -180,7 +250,15 @@
         Fecha de alta <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <input class="form-control" name="FechaAlta"  formControlName="FechaAlta"/>
+        <input
+          class="form-control"
+          name="FechaAlta"
+          formControlName="FechaAlta"
+        />
+        <div class="validacion" *ngIf="(FormRegistro.controls['FechaAlta'].touched || submitted) 
+                        && FormRegistro.controls['FechaAlta'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
 
@@ -191,7 +269,9 @@
       >
       <div class="col-sm-6">
         <select name="Activo" [disabled]="true" class="form-control">
-        <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">{{ opt.Nombre }}</option>
+          <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
+            {{ opt.Nombre }}
+          </option>
         </select>
       </div>
     </div>
@@ -199,19 +279,23 @@
 
   <!-- Botones Grabar, Cancelar/Volver' -->
   <div class="row justify-content-center">
-    <button type="button" class="btn btn-primary" (click)="Grabar()" *ngIf=" AccionABMC == 'A'  || AccionABMC == 'M'"  >
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="Grabar()"
+      *ngIf="AccionABMC == 'A' || AccionABMC == 'M'"
+    >
       <i class="fa fa-check"></i> Grabar
     </button>
     &nbsp;
     <button type="button" class="btn btn-warning" (click)="Volver()">
-      <i class="fa fa-undo"></i> {{AccionABMC == 'A'  || AccionABMC == 'M' ? 'Cancelar' : 'Volver'}}
+      <i class="fa fa-undo"></i>
+      {{ AccionABMC == 'A' || AccionABMC == 'M' ? 'Cancelar' : 'Volver' }}
     </button>
-
   </div>
 
   <!--texto: Revisar los datos ingresados...-->
   <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="false">
-    <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
+    <i class="fa fa-exclamation-sign"></i>{{ Mensajes['RD'] }}
   </div>
-
 </form>
