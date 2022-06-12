@@ -12,7 +12,7 @@
   <div class="form-group row">
     <label class="col-form-label col-sm-2 offset-sm-1"> Nombre: </label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" formControlName="Nombre" />
+      <input type="text" class="form-control text-uppercase" formControlName="Nombre" />
     </div>
     <label class="col-form-label col-sm-2 offset-sm-1"> Activo: </label>
     <div class="col-sm-3">
@@ -155,13 +155,22 @@
         Nombre <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" formControlName="Nombre" />
+      <input type="text" class="form-control" formControlName="Nombre"
+              [ngClass]="{'is-invalid': (FormRegistro.controls['Nombre'].touched || submitted)  
+              && FormRegistro.controls['Nombre'].errors}"/>
+        
         <div class="validacion" *ngIf="(FormRegistro.controls['Nombre'].touched || submitted) 
-                        && FormRegistro.controls['Nombre'].hasError('required')">
-            Dato requerido.
-          </div>
+                    && FormRegistro.controls['Nombre'].hasError('required')">
+                    Dato requerido.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormRegistro.controls['Nombre'].hasError('minlength') || FormRegistro.controls['Nombre'].hasError('maxlength')">
+          Dato texto, 4 a 55 caracteres.
+        </div>
       </div>
     </div>
+
 
     <!--campo precio-->
     <div class="row form-group">
@@ -171,14 +180,16 @@
       <div class="col-sm-6">
         <input
           type="text"
-          name="Precio"
-          class="form-control"
+          class="form-control text-uppercase"
           formControlName="Precio"
         />
         <div class="validacion" *ngIf="(FormRegistro.controls['Precio'].touched || submitted) 
-                        && FormRegistro.controls['Precio'].hasError('required')">
-            Dato requerido.
-          </div>
+                    && FormRegistro.controls['Precio'].hasError('required')">
+                    Dato requerido.
+        </div>
+        <div class="text-danger" *ngIf="FormRegistro.controls['Precio'].hasError('pattern')">
+                    Dato numérico, 1 a 7 dígitos.
+        </div>
       </div>
     </div>
 
@@ -191,13 +202,16 @@
         <input
           type="text"
           name="Stock"
-          class="form-control"
+          class="form-control text-uppercase"
           formControlName="Stock"
         />
         <div class="validacion" *ngIf="(FormRegistro.controls['Stock'].touched || submitted) 
-                        && FormRegistro.controls['Stock'].hasError('required')">
-            Dato requerido.
-          </div>
+                    && FormRegistro.controls['Stock'].hasError('required')">
+                    Dato requerido.
+        </div>
+        <div class="text-danger" *ngIf="FormRegistro.controls['Stock'].hasError('pattern')">
+                    Dato numérico, 1 a 10 dígitos.
+        </div>
       </div>
     </div>
 
@@ -210,13 +224,16 @@
         <input
           type="text"
           name="CodigoDeBarra"
-          class="form-control"
+          class="form-control text-uppercase"
           formControlName="CodigoDeBarra"
         />
         <div class="validacion" *ngIf="(FormRegistro.controls['CodigoDeBarra'].touched || submitted) 
-                        && FormRegistro.controls['CodigoDeBarra'].hasError('required')">
-            Dato requerido.
-          </div>
+                    && FormRegistro.controls['CodigoDeBarra'].hasError('required')">
+                    Dato requerido.
+        </div>
+        <div class="text-danger" *ngIf="FormRegistro.controls['CodigoDeBarra'].hasError('pattern')">
+                    Dato numérico, 1 a 13 dígitos.
+        </div>
       </div>
     </div>
 
@@ -251,7 +268,7 @@
       </label>
       <div class="col-sm-6">
         <input
-          class="form-control"
+          class="form-control text-uppercase"
           name="FechaAlta"
           formControlName="FechaAlta"
         />
@@ -268,11 +285,15 @@
         >Activo</label
       >
       <div class="col-sm-6">
-        <select name="Activo" [disabled]="true" class="form-control">
+        <select name="Activo" [disabled]="false" class="form-control" formControlName="Activo">
           <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
             {{ opt.Nombre }}
           </option>
         </select>
+        <div class="validacion" *ngIf="(FormRegistro.controls['Activo'].touched || submitted) 
+                        && FormRegistro.controls['Activo'].hasError('required')">
+            Dato requerido.
+          </div>
       </div>
     </div>
   </fieldset>

@@ -53,16 +53,21 @@ export class ArticulosComponent implements OnInit {
   FormRegistro = new FormGroup({
     IdArticulo: new FormControl(0),
     Nombre: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(55),
     ]),
     Precio: new FormControl(null, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{1,7}'),
     ]),
     Stock: new FormControl(null, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{1,7}'),
     ]),
     CodigoDeBarra: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{13}'),
     ]),
     IdArticuloFamilia: new FormControl('', [Validators.required]),
     FechaAlta: new FormControl('', [
@@ -93,6 +98,7 @@ export class ArticulosComponent implements OnInit {
   Agregar() {
     this.AccionABMC = "A";
     this.FormRegistro.reset({ Activo: true, IdArticulo: 0 });
+    this.submitted = false;
   }
 
  
@@ -140,6 +146,7 @@ export class ArticulosComponent implements OnInit {
  
 // grabar tanto altas como modificaciones
 Grabar() {   //No me salio... Está en la pag 40 de la guia paso a paso
+  this.submitted = true;
   // verificar que los validadores esten OK
   if (this.FormRegistro.invalid) {
     return;
