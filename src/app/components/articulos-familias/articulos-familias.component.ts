@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ArticuloFamilia } from "../../models/articulo-familia";
 import { MockArticulosFamiliasService } from "../../services/mock-articulos-familias.service";
+import { ArticulosFamiliasService } from "../../services/articulos-familias.service";
  
 @Component({
   selector: "app-articulos-familias",
@@ -12,8 +13,9 @@ export class ArticulosFamiliasComponent implements OnInit {
   Items: ArticuloFamilia[] = [];
  
   constructor(
-    private articulosFamiliasService:  MockArticulosFamiliasService
-  ){}
+    //private articulosFamiliasService:  MockArticulosFamiliasService
+      private articulosFamiliasService:  ArticulosFamiliasService
+    ){}
  
   ngOnInit() {
     this.GetFamiliasArticulos();
