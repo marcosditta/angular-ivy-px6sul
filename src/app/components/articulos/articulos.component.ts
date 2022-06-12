@@ -69,9 +69,12 @@ export class ArticulosComponent implements OnInit {
       Validators.required,
       Validators.pattern('[0-9]{13}'),
     ]),
-    IdArticuloFamilia: new FormControl('', [Validators.required]),
-    FechaAlta: new FormControl('', [
+    IdArticuloFamilia: new FormControl('', [
       Validators.required
+    ]),
+    FechaAlta: new FormControl('', [
+      Validators.required,
+      Validators.pattern('(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}'),
     ]),
     Activo: new FormControl(true),
   });
