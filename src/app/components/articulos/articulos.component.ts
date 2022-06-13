@@ -151,7 +151,10 @@ export class ArticulosComponent implements OnInit {
   }
  
 // grabar tanto altas como modificaciones
-Grabar() {   //No me salio... Está en la pag 40 de la guia paso a paso
+Grabar() {      
+  //No me salio... Está en la pag 40 de la guia paso a paso pero al copiar la funcion me tira error
+  //Realmente no se que está mal 
+  //Adjunto captura de pantalla https://drive.google.com/file/d/1jHhCrnyRDHZlMqzBR4TkhcNNySnk1NoR/view
   this.submitted = true;
   // verificar que los validadores esten OK
   if (this.FormRegistro.invalid) {
